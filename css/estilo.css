@@ -1,0 +1,21 @@
+.centro{
+    width: 100%;
+    text-align: center;
+    align-content: center;
+}
+.alargado{
+    width: 100%;
+}
+
+.titulo_contacto{
+    color:black;
+}
+
+.modal_color{
+    background-color: #007bff;
+}
+
+.salto{
+    margin: 1em;
+}
+
