@@ -1,5 +1,5 @@
 <?php
-function AbrirConexion() {
+/*function AbrirConexion() {
     $dbhost = "localhost";
     $dbuser = "root";
     $dbpass = "";
@@ -12,21 +12,21 @@ function CerrarConexion($con) {
 
     $con ->close();
 
-}
+}*/
 
 	/*Constantes de conexiÃ³n a la base de datos*/
-	//define('DB_HOST','localhost');
+	define('DB_HOST','localhost');
 	 /*Normalmente es localhost pero a veces puede cambiar*/
-    //define('DB_USER','root');
+    define('DB_USER','root');
      /*Usuario administrador de la base de datos a la que nos vamos a conectar*/
-    //define('DB_PASS',''); 
+    define('DB_PASS',''); 
     /*Password de la base de datos a la que nos conectemos*/
-    //define('DB_NAME','agenda'); 
+    define('DB_NAME','agenda'); 
     /*Nombre de la base de datos*/
-    //define('DB_CHARSET','utf-8');
+    define('DB_CHARSET','utf-8');
     /*Para que la codificaciÃ³n de lo que almacenamos en la base de datos sea UTF-8*/
 
-    /*class Conexion{
+    class Conexion{
     	protected $db; 
     	public function __construct(){
 	    	$this->db = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME); 
@@ -50,6 +50,6 @@ function CerrarConexion($con) {
 	    public function error(){
 	    	return $this->db->error;
 	    }
-    }*/
+    }
    
 ?>

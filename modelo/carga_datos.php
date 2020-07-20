@@ -1,31 +1,39 @@
 <?php
 include_once("conexion.class.php");
 
-
-//$con = new Conexion();
-
-function cargar_datos_tabla($tabla="contactos"){
+function cargar_datos($tabla="contactos"){
     $contactos=[];
 
-    $con = AbrirConexion();
+    //$con = AbrirConexion();
+    $con = new Conexion();
 
     $sql = "SELECT * FROM `".$tabla."`";
     $resultado=$con->query($sql);
+    $numero_lista=0;
 
     if (isset($resultado->num_rows)) {
         while ($row = $resultado->fetch_all(MYSQLI_ASSOC)) {
-            $contactos = array("".$tabla."" => $row);
-        //array_push($contactos, $item);
+            array_push($contactos, $row);
         }
     }
     
-    CerrarConexion($con);
+    
+    //CerrarConexion($con);
+    $con->close();
     return $contactos;
 }
 
-class Contactos($nombre,$apellidos,$descripcion,$telefono_principal,$telefono_secundario,$correo_principal,$correo_secundario,$favoritos){
+class Contactos {
+    var $nombre;
+    var $apellidos;
+    var $descripcion;
+    var $telefono_principal;
+    var $telefono_secundario;
+    var $correo_principal;
+    var $correo_secundario;
+    var $favoritos;
 
-    function __construct(){
+    function __construct($nombre,$apellidos,$descripcion,$telefono_principal,$telefono_secundario,$correo_principal,$correo_secundario){
         $this->nombre = $nombre;
         $this->apellidos = $apellidos;
         $this->descripcion = $descripcion;
@@ -33,35 +41,34 @@ class Contactos($nombre,$apellidos,$descripcion,$telefono_principal,$telefono_se
         $this->telefono_secundario = $telefono_secundario;
         $this->correo_principal = $correo_principal;
         $this->correo_secundario = $correo_secundario;
-        $this->favoritos = $favoritos;
+        //$this->favoritos = $favoritos;
     }
 
-    function insertar_contacto(Conexion $con, $contacto){
-        id	nombre	apellidos	descripcion	telefono_principal	telefono_secundario	favoritos       
+    function insertar_contacto(){
+        //$con = AbrirConexion();
+        $con = new Conexion();
+
         $sql = "INSERT INTO `contactos`
             ( `nombre`
             , `apellidos`
             , `descripcion`
             , `telefono_principal`
             , `telefono_secundario`
-            , `correo_principal`
-            , `correo_secundario`
-            , `favoritos`) 
+            , `correo_principal`) 
                 VALUES
-                ('".$contacto->nombre."'
-                ,'".$contacto->apellidos."'
-                ,'".$contacto->descripcion."'
-                ,'".$contacto->telefono_principal."'
-                ,'".$contacto->telefono_secundario."'
-                ,'".$contacto->correo_principal."'
-                ,'".$contacto->correo_secundario."'
-                ,'".$contacto->favoritos."')";
-    
-    
+                ('{$this->nombre}'
+                ,'{$this->apellidos}'
+                ,'{$this->descripcion}'
+                ,'{$this->telefono_principal}'
+                ,'{$this->telefono_secundario}'
+                ,'{$this->correo_principal}')";
+                //,'".$contacto->favoritos."'
         if ($con->query($sql) === true) {
-            Header( "Location: ../inicio.php" );
+            Header( "Location: ../vista/inicio.php" );
         } else {
             echo "Error insertando en la tabla: " . $con->error();
+            print_r($con->error());
+            die;
         }
     }
     function actualiza_contacto(Conexion $con, $contacto){
@@ -71,9 +78,7 @@ class Contactos($nombre,$apellidos,$descripcion,$telefono_principal,$telefono_se
         `descripcion` = '".$contacto->descripcion."' ,
         `telefono_principal` = '".$contacto->telefono_principal."' ,
         `contrasena` = '".$contacto->telefono_secundario."' ,
-        `tipo` = '".$contacto->correo_principal."' ,
-        `tipo` = '".$contacto->correo_secundario."' ,
-        `tipo` = '".$contacto->favoritos."' 
+        `tipo` = '".$contacto->correo_principal."'
         WHERE `id`= '".$id."'";
     
         if ($con->query($sql) === true) {
@@ -88,7 +93,6 @@ class Contactos($nombre,$apellidos,$descripcion,$telefono_principal,$telefono_se
     function elimina_contacto(Conexion $con, $array_guarda){
     
         $sql = "DELETE FROM `contactos` WHERE `id`= '".$id."'";
-    
     
         if ($con->query($sql) === true) {
             echo "La  eliminación se  ha hecho correctamente";
