@@ -9,7 +9,6 @@ function cargar_datos($tabla="contactos"){
 
     $sql = "SELECT * FROM `".$tabla."`";
     $resultado=$con->query($sql);
-    $numero_lista=0;
 
     if (isset($resultado->num_rows)) {
         while ($row = $resultado->fetch_all(MYSQLI_ASSOC)) {
@@ -22,6 +21,30 @@ function cargar_datos($tabla="contactos"){
     $con->close();
     return $contactos;
 }
+function llamada_contactos_edit($id){
+    $contactos=[];
+    //$con = AbrirConexion();
+    $con = new Conexion();
+
+    $sql = "SELECT * FROM `contactos` WHERE `id` = '".$id."'";
+    $resultado=$con->query($sql);
+
+    if (isset($resultado->num_rows)) {
+        while ($row = $resultado->fetch_all(MYSQLI_ASSOC)) {
+            $contactos= $row;
+        }
+    }
+    //print_r($contactos);
+    foreach ($contactos as $contacto1){
+        $contacto = $contacto1;
+    }
+    
+    
+    //CerrarConexion($con);
+    $con->close();
+    return $contacto;
+}
+
 
 class Contactos {
     var $nombre;
@@ -44,9 +67,8 @@ class Contactos {
         //$this->favoritos = $favoritos;
     }
 
-    function insertar_contacto(){
+    function insertar_contacto($con){
         //$con = AbrirConexion();
-        $con = new Conexion();
 
         $sql = "INSERT INTO `contactos`
             ( `nombre`
@@ -64,41 +86,43 @@ class Contactos {
                 ,'{$this->correo_principal}')";
                 //,'".$contacto->favoritos."'
         if ($con->query($sql) === true) {
-            Header( "Location: ../vista/inicio.php" );
+            $accion="succes";
+            Header( "Location: ../vista/inicio.php?mensaje=$accion" );
         } else {
-            echo "Error insertando en la tabla: " . $con->error();
-            print_r($con->error());
-            die;
+            $accion="";
+            Header( "Location: ../vista/inicio.php?mensaje=$accion" );
         }
     }
-    function actualiza_contacto(Conexion $con, $contacto){
+    function actualiza_contacto($con,$id){        
 
-        $sql = "UPDATE `contactos` SET `nombre` = '".$contacto->nombre."' ,
-        `apellidos` = '".$contacto->apellidos."' ,
-        `descripcion` = '".$contacto->descripcion."' ,
-        `telefono_principal` = '".$contacto->telefono_principal."' ,
-        `contrasena` = '".$contacto->telefono_secundario."' ,
-        `tipo` = '".$contacto->correo_principal."'
+        $sql = "UPDATE `contactos` SET 
+        `nombre` = '{$this->nombre}' ,
+        `apellidos` = '{$this->apellidos}' ,
+        `descripcion` = '{$this->descripcion}' ,
+        `telefono_principal` = '{$this->telefono_principal}' ,
+        `telefono_secundario` = '{$this->telefono_secundario}' ,
+        `correo_principal` = '{$this->correo_principal}'
         WHERE `id`= '".$id."'";
     
         if ($con->query($sql) === true) {
-            echo "La  actualización se  ha hecho correctamente";
-    
-            Header( "Location: index.php" );
+            $accion="succes";
+            Header( "Location: ../vista/inicio.php?mensaje=$accion" );
         } else {
-            echo "Error actualización en la tabla: " . $con->error();
+            $accion="";
+            Header( "Location: ../vista/inicio.php?mensaje=$accion" );
         }
     }
 
-    function elimina_contacto(Conexion $con, $array_guarda){
-    
+    function elimina_contacto($con,$id){
+
         $sql = "DELETE FROM `contactos` WHERE `id`= '".$id."'";
     
         if ($con->query($sql) === true) {
-            echo "La  eliminación se  ha hecho correctamente";
-            Header( "Location: index.php" );
+            $accion="succes";
+            Header( "Location: ../vista/inicio.php?mensaje=$accion" );
         } else {
-            echo "Error insertando en la tabla: " . $con->error();
+            $accion="";
+            Header( "Location: ../vista/inicio.php?mensaje=$accion" );
         }
     }
 
