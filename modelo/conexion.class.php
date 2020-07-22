@@ -1,18 +1,4 @@
 <?php
-/*function AbrirConexion() {
-    $dbhost = "localhost";
-    $dbuser = "root";
-    $dbpass = "";
-    $db = "agenda";
-    $con = new mysqli($dbhost, $dbuser, $dbpass,$db) or die("Connect failed: %s\n". $con -> error);
-    return $con;
-}
- 
-function CerrarConexion($con) {
-
-    $con ->close();
-
-}*/
 
 	/*Constantes de conexiÃ³n a la base de datos*/
 	define('DB_HOST','localhost');

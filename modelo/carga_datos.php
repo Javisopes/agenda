@@ -4,7 +4,6 @@ include_once("conexion.class.php");
 function cargar_datos($tabla="contactos"){
     $contactos=[];
 
-    //$con = AbrirConexion();
     $con = new Conexion();
 
     $sql = "SELECT * FROM `".$tabla."`";
@@ -16,14 +15,11 @@ function cargar_datos($tabla="contactos"){
         }
     }
     
-    
-    //CerrarConexion($con);
     $con->close();
     return $contactos;
 }
 function llamada_contactos_edit($id){
     $contactos=[];
-    //$con = AbrirConexion();
     $con = new Conexion();
 
     $sql = "SELECT * FROM `contactos` WHERE `id` = '".$id."'";
@@ -34,13 +30,10 @@ function llamada_contactos_edit($id){
             $contactos= $row;
         }
     }
-    //print_r($contactos);
     foreach ($contactos as $contacto1){
         $contacto = $contacto1;
     }
     
-    
-    //CerrarConexion($con);
     $con->close();
     return $contacto;
 }
@@ -64,11 +57,9 @@ class Contactos {
         $this->telefono_secundario = $telefono_secundario;
         $this->correo_principal = $correo_principal;
         $this->correo_secundario = $correo_secundario;
-        //$this->favoritos = $favoritos;
     }
 
     function insertar_contacto($con){
-        //$con = AbrirConexion();
 
         $sql = "INSERT INTO `contactos`
             ( `nombre`
@@ -84,7 +75,6 @@ class Contactos {
                 ,'{$this->telefono_principal}'
                 ,'{$this->telefono_secundario}'
                 ,'{$this->correo_principal}')";
-                //,'".$contacto->favoritos."'
         if ($con->query($sql) === true) {
             $accion="succes";
             Header( "Location: ../vista/inicio.php?mensaje=$accion" );
@@ -127,9 +117,6 @@ class Contactos {
     }
 
 }
-
-
-
 
 
 ?>

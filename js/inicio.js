@@ -20,39 +20,13 @@ function recogerDataFormEdit(id="") {
                 $("#modalEditCorreo").val(response.correo_principal);
                 console.log(response.id);
                 array_values= response.id;
-                //console.log("Estos son "+jsonData);
-                /*response.forEach(function(elemento, indice, array) {
-                    console.log(elemento, indice);
-                })*/
- 
-                // user is logged in successfully in the back-end
-                // let's redirect
-                /*if (jsonData.success == "1")
-                {
-                    location.href = 'my_profile.php';
-                }
-                else
-                {
-                    alert('Invalid Credentials!');
-                }*/
            }
        });
     }
 }
 
-/*(function() {
-        var form = document.getElementById('eliminarContacto');
-        console.log(form)
-
-        
-        form.addEventListener('submit', function(event) {
-        // si es false entonces que no haga el submit
-       
-        }, false);
-  })();*/
 $(document).ready(function() {
 
-    $('.toast').toast('show');
 
     $( ".btEliminarContacto" ).on( "click", function() {
         if (!confirm('Vas a eliminar este elemento, estas seguro de ello?')) {
