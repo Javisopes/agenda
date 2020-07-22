@@ -46,7 +46,7 @@ if(!isset($_POST["bt_enviar"])){
                     ?>
                     <div class="alert alert-success alert-dismissible fade show col-sm-5 mx-auto" role="alert">
                         <strong>La acción se ha realizado exitosamente!</strong>
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Cerrar">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
@@ -55,7 +55,7 @@ if(!isset($_POST["bt_enviar"])){
                     ?>
                     <div class="alert alert-danger alert-dismissible fade show col-sm-5 mx-auto" role="alert">
                         <strong>Oooops!</strong> Por algúna razón no se ha podido realizar su operación, vuelva a intentarlo
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Cerrar">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
@@ -89,7 +89,7 @@ if(!isset($_POST["bt_enviar"])){
         <div class="container p-4 my-4 bg-primary jumbotron bg-white">
             <h1 class="centro titulo_contacto">Lista de contactos</h1>
             <div class="salto"></div>
-            <table class="table table-striped bg-white">
+            <table class="table table-responsive table-striped bg-white">
                 <thead>
                     <tr>
                         <th>Nombre</th>
@@ -172,8 +172,8 @@ if(!isset($_POST["bt_enviar"])){
                     <div class="input-group-prepend">
                         <span class="input-group-text">Contacto</span>
                     </div>
-                        <input type="text" class="form-control" placeholder="Nombre" name="nombre" Required>
-                        <input type="text" class="form-control" placeholder="Apellidos" name="apellidos">
+                        <input type="text" class="form-control" placeholder="Nombre" name="nombre" maxlength="40" Required>
+                        <input type="text" class="form-control" placeholder="Apellidos" name="apellidos" maxlength="80">
                 </div>
                 <span class="input-group-text">Descripción</span>
                 <div class="input-group mb-3">
@@ -198,7 +198,7 @@ if(!isset($_POST["bt_enviar"])){
 
       <!-- Modal footer -->
       <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
       </div>
 
     </div>
@@ -226,8 +226,8 @@ if(!isset($_POST["bt_enviar"])){
                         <span class="input-group-text">Contacto</span>
                     </div>
                     <input type="hidden" id="modalEditId" name="id">
-                        <input type="text" class="form-control" id="modalEditNombre" placeholder="Nombre" name="nombre">
-                        <input type="text" class="form-control" id="modalEditApellidos" placeholder="Apellidos" name="apellidos">
+                        <input type="text" class="form-control" id="modalEditNombre" placeholder="Nombre" name="nombre" maxlength="40">
+                        <input type="text" class="form-control" id="modalEditApellidos" placeholder="Apellidos" name="apellidos" maxlength="80">
                 </div>
                 <span class="input-group-text">Descripción</span>
                 <div class="input-group mb-3">
@@ -252,7 +252,7 @@ if(!isset($_POST["bt_enviar"])){
 
       <!-- Modal footer -->
       <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
       </div>
 
     </div>
